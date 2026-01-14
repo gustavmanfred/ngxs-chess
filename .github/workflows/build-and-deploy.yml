@@ -32,9 +32,13 @@ jobs:
 
       # 5. App bauen
       - name: Build Angular app
-        run: npm run build -- --configuration production
+        run: npm run build -- --configuration production --base-href "/ngxs-chess/"
 
-      # 6. Deploy zu GitHub Pages (optional)
+      # 5.5 Erstelle .nojekyll für GitHub Pages (damit _angular Ordner hostet wird)
+      - name: Create .nojekyll file
+        run: touch dist/ngxs-chess/.nojekyll
+
+      # 6. Deploy zu GitHub Pages
       - name: Deploy to GitHub Pages
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
